@@ -3,9 +3,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:meta_ozce_0/const/background.dart';
 import 'package:meta_ozce_0/Screen/components/home_form.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Background(
