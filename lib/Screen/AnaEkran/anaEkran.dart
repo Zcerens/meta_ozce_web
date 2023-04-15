@@ -24,7 +24,9 @@ class _AnaEkranState extends State<AnaEkran> {
               //let's add the navigation menu for this project
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [],
+                children: [
+                  
+                ],
               ),
               const SizedBox(
                 height: 20.0,

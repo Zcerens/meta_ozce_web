@@ -56,13 +56,13 @@ class _HomeFormState extends State<HomeForm> {
             },
             selectedIndex: _selectedIndex,
             extended: isExpanded,
-            backgroundColor: Colors.deepPurple.shade400,
+            backgroundColor: kPrimaryColor,
             unselectedIconTheme:
                 const IconThemeData(color: Colors.white, opacity: 1),
             unselectedLabelTextStyle: const TextStyle(
               color: Colors.white,
             ),
-            selectedIconTheme: IconThemeData(color: kPrimaryBackColor),
+            selectedIconTheme: IconThemeData(color: kPrimaryLightColor),
             destinations: const [
               NavigationRailDestination(
                 icon: Icon(Icons.home),
