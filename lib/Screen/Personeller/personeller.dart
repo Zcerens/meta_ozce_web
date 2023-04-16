@@ -43,6 +43,7 @@ class _PersonellerState extends State<Personeller> {
     "Yemek Servisi",
     "Temizlik"
   ];
+  late bool loading = true;
 
   String ad = "";
 
@@ -115,7 +116,7 @@ class _PersonellerState extends State<Personeller> {
                   //       return Text('${asyncSnapshot.data.data()['soyad']}');
                   //     }),
 
-                  Text("personeller as String"),
+                  // Text("personeller as String"),
                   IconButton(
                     onPressed: () {
                       //let's trigger the navigation expansion
@@ -127,7 +128,6 @@ class _PersonellerState extends State<Personeller> {
                     icon: const Icon(Icons.menu),
                   ),
                   buildCalisanlar(),
-                  buildTableOlusturma(),
                 ],
               ),
             ),
@@ -214,10 +214,12 @@ class _PersonellerState extends State<Personeller> {
         SizedBox(
           height: 250,
           child: StreamBuilder<QuerySnapshot>(
-              stream: personelRef.snapshots(),
-              builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
-                List<DocumentSnapshot> listOfDocumentSnap =
-                    asyncSnapshot.data.docs;
+            stream: personelRef.snapshots(),
+            builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
+              List<DocumentSnapshot> listOfDocumentSnap =
+                  asyncSnapshot.data.docs;
+
+              if (asyncSnapshot.hasData) {
                 return ListView.builder(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
@@ -439,7 +441,12 @@ class _PersonellerState extends State<Personeller> {
                         ],
                       );
                     });
-              }),
+              } else if (asyncSnapshot.hasError) {
+                const Text('Personel verisi alnamadı');
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,

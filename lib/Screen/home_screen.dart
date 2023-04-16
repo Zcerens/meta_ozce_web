@@ -1,7 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:meta_ozce_0/const/background.dart';
-import 'package:meta_ozce_0/Screen/components/home_form.dart';
+import 'package:meta_ozce_0/components/home_form.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

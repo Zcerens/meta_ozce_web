@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meta_ozce_0/Screen/AnaEkran/anaEkran.dart';
+import 'package:meta_ozce_0/Screen/GeriDonutler/geridonutler.dart';
 import 'package:meta_ozce_0/Screen/Personeller/personeller.dart';
 import 'package:meta_ozce_0/const/constant.dart';
 
@@ -40,7 +41,7 @@ class _HomeFormState extends State<HomeForm> {
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       AnaEkran(),
-      ikinciEkran(),
+      GeriDonutler(),
       Personeller(),
       dorduncuEkran(),
     ];
@@ -87,10 +88,6 @@ class _HomeFormState extends State<HomeForm> {
       ),
     );
   }
-
-  Widget ikinciEkran() => Container(
-        child: const Text("2.ekran"),
-      );
 
   Widget dorduncuEkran() => Container(
         child: const Text("4.ekran"),

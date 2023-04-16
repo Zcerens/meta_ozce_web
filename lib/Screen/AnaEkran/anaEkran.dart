@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../../const/constant.dart';
 
 class AnaEkran extends StatefulWidget {
   const AnaEkran({super.key});
@@ -62,7 +65,7 @@ class _AnaEkranState extends State<AnaEkran> {
                               height: 20.0,
                             ),
                             const Text(
-                              "6 Personel",
+                              "820 Personel",
                               style: TextStyle(
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,
@@ -91,7 +94,7 @@ class _AnaEkranState extends State<AnaEkran> {
                                   width: 15.0,
                                 ),
                                 const Text(
-                                  "Comments",
+                                  "Geri Dönütler",
                                   style: TextStyle(
                                     color: Colors.red,
                                     fontSize: 26.0,
@@ -104,7 +107,7 @@ class _AnaEkranState extends State<AnaEkran> {
                               height: 20.0,
                             ),
                             const Text(
-                              "+32 Comments",
+                              "+850 Değerlendirme",
                               style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 36,
@@ -134,7 +137,7 @@ class _AnaEkranState extends State<AnaEkran> {
                                   width: 15.0,
                                 ),
                                 const Text(
-                                  "Müşteriler",
+                                  "Aylık Müşteri Sayısı",
                                   style: TextStyle(
                                     fontSize: 26.0,
                                     color: Colors.amber,
@@ -147,7 +150,7 @@ class _AnaEkranState extends State<AnaEkran> {
                               height: 20.0,
                             ),
                             const Text(
-                              "3.142 Müşteri",
+                              "65.142 Müşteri",
                               style: TextStyle(
                                 fontSize: 36,
                                 color: Colors.amber,
@@ -177,7 +180,7 @@ class _AnaEkranState extends State<AnaEkran> {
                                   width: 15.0,
                                 ),
                                 const Text(
-                                  "Revenue",
+                                  "Aylık Kazanç Yüzdesi",
                                   style: TextStyle(
                                     fontSize: 26.0,
                                     color: Colors.green,
@@ -190,7 +193,7 @@ class _AnaEkranState extends State<AnaEkran> {
                               height: 20.0,
                             ),
                             const Text(
-                              "2.300 \$",
+                              "%+16.24",
                               style: TextStyle(
                                 fontSize: 36,
                                 color: Colors.green,
@@ -208,46 +211,7 @@ class _AnaEkranState extends State<AnaEkran> {
               const SizedBox(
                 height: 30.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      const Text(
-                        "6 Articles",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28.0,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      const Text(
-                        "3 new Articles",
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: 300.0,
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: "Type Article Title",
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black26,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+
               const SizedBox(
                 height: 40.0,
               ),
@@ -256,6 +220,92 @@ class _AnaEkranState extends State<AnaEkran> {
 
               const SizedBox(
                 height: 40.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CircularPercentIndicator(
+                      radius: 150.0,
+                      lineWidth: 20.0,
+                      animation: true,
+                      animationDuration: 3000,
+                      percent: 0.6,
+                      // percent: double.parse(double.parse(
+                      //             widget.favoriDoctor['yildizOrtalamasi'])
+                      //         .toStringAsFixed(2)) *
+                      //     0.2,
+                      //userModel.rating,
+                      center: new Text(
+                        "2.744",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15.0),
+                      ),
+                      footer: Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: new Text(
+                          "Günlük Müşteri",
+                          style: new TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 14.0),
+                        ),
+                      ),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      progressColor: kPrimaryLightColor,
+                    ),
+                    CircularPercentIndicator(
+                      radius: 150.0,
+                      lineWidth: 20.0,
+                      animation: true,
+                      animationDuration: 3000,
+                      percent: 0.5,
+                      //cerokozi widget.favoriDoctor['baktigiHastaSayisi'] / 100,
+                      //userModel.rating,
+                      center: new Text(
+                        "₺28.230",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15.0),
+                      ),
+                      footer: Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: new Text(
+                          "Günlük Gelir",
+                          style: new TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 14.0),
+                        ),
+                      ),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      progressColor: kPrimaryLightColor,
+                    ),
+                    CircularPercentIndicator(
+                      radius: 150.0,
+                      lineWidth: 20.0,
+                      animation: true,
+                      animationDuration: 3000,
+                      percent: 0.6,
+                      // percent: double.parse(double.parse(
+                      //             widget.favoriDoctor['yildizOrtalamasi'])
+                      //         .toStringAsFixed(2)) *
+                      //     0.2,
+                      //userModel.rating,
+                      center: new Text(
+                        "625",
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15.0),
+                      ),
+                      footer: Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: new Text(
+                          "Aktif Personel Sayısı",
+                          style: new TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 14.0),
+                        ),
+                      ),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      progressColor: kPrimaryLightColor,
+                    ),
+                  ],
+                ),
               ),
               //Now let's add the Table
             ],
