@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:intl/intl.dart';
 import '../../const/constant.dart';
 
 class Personeller extends StatefulWidget {
@@ -34,13 +36,36 @@ class _PersonellerState extends State<Personeller> {
     {"icon": FontAwesomeIcons.hand, "category": "Mehmet Sakin"},
     {"icon": FontAwesomeIcons.lungs, "category": "Ayşe Yenilmez"}
   ];
-  List<dynamic> tumGorevler = [
-    {"icerik": "Oda 1 temizlenecek", "kod": "0"},
-    {"icerik": "Oda 2 temizlenecek", "kod": "1"}
+  List<String> cinsiyetler = ["Erkek", "Kadın"];
+  List<String> kategoriler = [
+    "Havuz",
+    "Oda Servisi",
+    "Yemek Servisi",
+    "Temizlik"
   ];
+
+  String ad = "";
+
+  int yas = 0;
+
+  String soyad = "";
+
+  String dogumTarihiString = "Doğum tarihi seçiniz";
+
+  DateTime dogumTarihi = DateTime.now();
+
+  String cinsiyet = "";
+
+  int maas = 0;
+
+  String kategori = "";
+  String gorev = "";
 
   @override
   void initState() {
+    // dogumTarihiString =
+    //     dogumTarihiString = DateFormat("dd MMMM yyyy").format(DateTime.now());
+
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference testCollectionRef =
         FirebaseFirestore.instance.collection('testCollection');
@@ -53,8 +78,6 @@ class _PersonellerState extends State<Personeller> {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference demoRef = _firestore.collection("metaOzcePersonel");
-    var babaRef = _firestore.collection("metaOzcePersonel").doc("MerveKaynak");
     // late List<dynamic> personeller = [
     //   {"adi": "ceren"}
     // ];
@@ -115,60 +138,58 @@ class _PersonellerState extends State<Personeller> {
   }
 
   bool flagUsertype = false;
-  Widget buildGorevAtama() => Padding(
-        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
-        child: DropdownButtonFormField<dynamic>(
-          decoration: const InputDecoration(
-            labelText: "Görevler",
-            hintText: 'Atanacak görevi seçin',
-            icon: Icon(Icons.person_pin_circle),
+  // Widget buildGorevAtama() => Padding(
+  //       padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+  //       child: DropdownButtonFormField<dynamic>(
+  //         decoration: const InputDecoration(
+  //           labelText: "Görevler",
+  //           hintText: 'Atanacak görevi seçin',
+  //           icon: Icon(Icons.person_pin_circle),
 
-            enabledBorder: OutlineInputBorder(
-                //borderSide: BorderSide(color: Colors.blue, width: 2),
+  //           enabledBorder: OutlineInputBorder(
+  //               //borderSide: BorderSide(color: Colors.blue, width: 2),
 
-                ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: Color.fromARGB(255, 35, 35, 35), width: 0.4),
-            ),
-            //filled: true,
-            fillColor: Colors.white,
-          ),
-          value: null,
-          items: tumGorevler
-              .map((gorev) => DropdownMenuItem<dynamic>(
-                  value: gorev,
-                  child: Container(
-                    height: 32,
-                    child: Text(gorev['icerik'].toString(),
-                        style: const TextStyle(fontSize: 15)),
-                  )))
-              .toList(),
-          onChanged: (value) {},
-          // onChanged: (userType) {
-          //   setState(() {
-          //     userTypeApi = userType;
-          //     if (userType == null) {
-          //       flagUsertype = false;
-          //     } else {
-          //       flagUsertype = true;
-          //     }
-          //     // selectedUserType = userType;
-          //   });
-          // },
-          validator: (userType) {
-            if (userType == null) {
-              return "Select one";
-            } else {
-              return null;
-            }
-          },
-        ),
-      );
+  //               ),
+  //           border: OutlineInputBorder(
+  //             borderSide: BorderSide(
+  //                 color: Color.fromARGB(255, 35, 35, 35), width: 0.4),
+  //           ),
+  //           //filled: true,
+  //           fillColor: Colors.white,
+  //         ),
+  //         value: null,
+  //         items: cinsiyetler
+  //             .map((gorev) => DropdownMenuItem<dynamic>(
+  //                 value: gorev,
+  //                 child: Container(
+  //                   height: 32,
+  //                   child: Text(gorev['icerik'].toString(),
+  //                       style: const TextStyle(fontSize: 15)),
+  //                 )))
+  //             .toList(),
+  //         onChanged: (value) {},
+  //         // onChanged: (userType) {
+  //         //   setState(() {
+  //         //     userTypeApi = userType;
+  //         //     if (userType == null) {
+  //         //       flagUsertype = false;
+  //         //     } else {
+  //         //       flagUsertype = true;
+  //         //     }
+  //         //     // selectedUserType = userType;
+  //         //   });
+  //         // },
+  //         validator: (userType) {
+  //           if (userType == null) {
+  //             return "Select one";
+  //           } else {
+  //             return null;
+  //           }
+  //         },
+  //       ),
+  //     );
   Widget buildCalisanlar() {
-    CollectionReference calisanRef = _firestore.collection("metaOzcePersonel");
-    var gorevKategorileriRef =
-        calisanRef.doc('AliYenilmez').collection('gorevKategorileri');
+    CollectionReference personelRef = _firestore.collection("metaOzcePersonel");
 
     return Column(
       children: [
@@ -193,7 +214,7 @@ class _PersonellerState extends State<Personeller> {
         SizedBox(
           height: 250,
           child: StreamBuilder<QuerySnapshot>(
-              stream: calisanRef.snapshots(),
+              stream: personelRef.snapshots(),
               builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
                 List<DocumentSnapshot> listOfDocumentSnap =
                     asyncSnapshot.data.docs;
@@ -227,127 +248,157 @@ class _PersonellerState extends State<Personeller> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    "${listOfDocumentSnap[index].data()} "),
-                                                content: Column(
-                                                  children: [
-                                                    StreamBuilder<
-                                                            QuerySnapshot>(
-                                                        stream:
-                                                            gorevKategorileriRef
-                                                                .snapshots(),
-                                                        builder: (BuildContext
-                                                                context,
-                                                            AsyncSnapshot
-                                                                asyncSnapshot) {
-                                                          List<DocumentSnapshot>
-                                                              listOfGorevler =
-                                                              asyncSnapshot
-                                                                  .data.docs;
-                                                          return Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    top: 20,
-                                                                    left: 5,
-                                                                    right: 5),
-                                                            child:
-                                                                DropdownButtonFormField<
-                                                                    dynamic>(
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                labelText:
-                                                                    "Görevler",
-                                                                hintText:
-                                                                    'Atanacak görevi seçin',
-                                                                icon: Icon(Icons
-                                                                    .person_pin_circle),
+                                          setState(() {
+                                            var adSoyad = "";
+                                            var gorevKategorileriRef = null;
+                                            adSoyad =
+                                                "${listOfDocumentSnap[index].get('ad')}${listOfDocumentSnap[index].get('soyad')}";
 
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                        //borderSide: BorderSide(color: Colors.blue, width: 2),
+                                            gorevKategorileriRef = personelRef
+                                                .doc(adSoyad)
+                                                .collection(
+                                                    'gorevKategorileri'); //calisanrefadsoyad
+                                            print(adSoyad);
 
-                                                                        ),
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderSide: BorderSide(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                      width:
-                                                                          0.4),
+                                            print(personelRef
+                                                .doc('AliYenilmez')
+                                                .collection('gorevKategorileri')
+                                                .get()); //calisanrefadsoyad
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      "${listOfDocumentSnap[index].data()} "),
+                                                  content: Column(
+                                                    children: [
+                                                      StreamBuilder<
+                                                              QuerySnapshot>(
+                                                          stream:
+                                                              gorevKategorileriRef
+                                                                  .snapshots(),
+                                                          builder: (BuildContext
+                                                                  context,
+                                                              AsyncSnapshot
+                                                                  asyncSnapshot) {
+                                                            List<DocumentSnapshot>
+                                                                listOfGorevler =
+                                                                asyncSnapshot
+                                                                    .data.docs;
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top: 20,
+                                                                      left: 5,
+                                                                      right: 5),
+                                                              child:
+                                                                  DropdownButtonFormField<
+                                                                      dynamic>(
+                                                                decoration:
+                                                                    const InputDecoration(
+                                                                  labelText:
+                                                                      "Görevler",
+                                                                  hintText:
+                                                                      'Atanacak görevi seçin',
+                                                                  icon: Icon(Icons
+                                                                      .person_pin_circle),
+
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                          //borderSide: BorderSide(color: Colors.blue, width: 2),
+
+                                                                          ),
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            35,
+                                                                            35,
+                                                                            35),
+                                                                        width:
+                                                                            0.4),
+                                                                  ),
+                                                                  //filled: true,
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
                                                                 ),
-                                                                //filled: true,
-                                                                fillColor:
-                                                                    Colors
-                                                                        .white,
+                                                                value: null,
+                                                                items: kategoriler
+                                                                    .map((kategori) => DropdownMenuItem<dynamic>(
+                                                                        value: kategori,
+                                                                        child: Container(
+                                                                          height:
+                                                                              32,
+                                                                          child: Text(
+                                                                              kategori.toString(),
+                                                                              style: const TextStyle(fontSize: 15)),
+                                                                        )))
+                                                                    .toList(),
+                                                                onChanged:
+                                                                    (value) {
+                                                                  kategori =
+                                                                      value;
+                                                                },
+                                                                // onChanged: (userType) {
+                                                                //   setState(() {
+                                                                //     userTypeApi = userType;
+                                                                //     if (userType == null) {
+                                                                //       flagUsertype = false;
+                                                                //     } else {
+                                                                //       flagUsertype = true;
+                                                                //     }
+                                                                //     // selectedUserType = userType;
+                                                                //   });
+                                                                // },
+                                                                validator:
+                                                                    (userType) {
+                                                                  if (userType ==
+                                                                      null) {
+                                                                    return "Select one";
+                                                                  } else {
+                                                                    return null;
+                                                                  }
+                                                                },
                                                               ),
-                                                              value: null,
-                                                              items: listOfGorevler
-                                                                  .map((gorev) => DropdownMenuItem<dynamic>(
-                                                                      value: gorev,
-                                                                      child: Container(
-                                                                        height:
-                                                                            32,
-                                                                        child: Text(
-                                                                            gorev['gorev']
-                                                                                .toString(),
-                                                                            style:
-                                                                                const TextStyle(fontSize: 15)),
-                                                                      )))
-                                                                  .toList(),
-                                                              onChanged:
-                                                                  (value) {},
-                                                              // onChanged: (userType) {
-                                                              //   setState(() {
-                                                              //     userTypeApi = userType;
-                                                              //     if (userType == null) {
-                                                              //       flagUsertype = false;
-                                                              //     } else {
-                                                              //       flagUsertype = true;
-                                                              //     }
-                                                              //     // selectedUserType = userType;
-                                                              //   });
-                                                              // },
-                                                              validator:
-                                                                  (userType) {
-                                                                if (userType ==
-                                                                    null) {
-                                                                  return "Select one";
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                            ),
-                                                          );
-                                                        }),
-                                                    buildYorum(),
+                                                            );
+                                                          }),
+                                                      buildYorum(),
 
-                                                    // Text(
-                                                    //     listOfGorevler[
-                                                    //             0]
-                                                    //         .get(
-                                                    //             "gorev"))
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text("Ok"),
+                                                      // Text(
+                                                      //     listOfGorevler[
+                                                      //             0]
+                                                      //         .get(
+                                                      //             "gorev"))
+                                                    ],
                                                   ),
-                                                ],
-                                              );
-                                            },
-                                          );
+                                                  actions: <Widget>[
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        gorevKategorileriRef
+                                                            .add({
+                                                          'gorev': gorev,
+                                                          'kategori': kategori,
+                                                          // personelRef.document(adSoyad).collection('string name').document().setData();
+                                                        });
+
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        gorev = "";
+                                                        kategori = "";
+
+                                                        // gorevKategorileriRef.add("gorev" : "bla")
+                                                      },
+                                                      child:
+                                                          const Text("Gönder"),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          });
                                         },
                                         child: ClipRRect(
                                             borderRadius:
@@ -402,14 +453,31 @@ class _PersonellerState extends State<Personeller> {
                       title: Text("Ekle"),
                       content: Column(
                         children: [
-                          buildGorevAtama(),
-                          buildYorum(),
+                          buildPersonelEklemeAd(),
+                          buildPersonelEklemeSoyad(),
+                          buildPersonelEklemeYas(),
+                          buildPersonelEklemeCinsiyet(),
+                          buildPersonelEklemeMaas(),
+                          // buildBirthDate(),
                         ],
                       ),
                       actions: <Widget>[
                         ElevatedButton(
                           onPressed: () {
+                            personelRef.add({
+                              'ad': ad,
+                              'soyad': soyad,
+                              'cinsiyet': cinsiyet,
+                              'maas': maas,
+                              'yas': yas,
+                            });
+
                             Navigator.of(context).pop();
+                            ad = "";
+                            soyad = "";
+                            yas = 0;
+                            cinsiyet = "";
+                            maas = 0;
                           },
                           child: const Text("Ok"),
                         ),
@@ -426,6 +494,276 @@ class _PersonellerState extends State<Personeller> {
       ],
     );
   }
+
+  buildPersonelEklemeAd() => Padding(
+        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+        child: TextFormField(
+          decoration: InputDecoration(
+            labelText: 'Personel Adı',
+            hintText: 'At least 4 charachter',
+            icon: const Icon(Icons.person),
+            fillColor: Colors.white,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: flagUsername == true
+                  ? const BorderSide(color: Colors.green)
+                  : const BorderSide(color: Colors.red),
+            ),
+            border: const OutlineInputBorder(),
+          ),
+          validator: (value) {
+            if (value!.length < 4) {
+              return "At least 4 charachter";
+            } else {
+              return null;
+            }
+          },
+          maxLength: 30,
+          onChanged: (value) {
+            setState(() {
+              if (value!.length < 4) {
+                flagUsername = false;
+              } else {
+                flagUsername = true;
+              }
+              ad = value;
+            });
+          },
+        ),
+      );
+  buildPersonelEklemeSoyad() => Padding(
+        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+        child: TextFormField(
+          decoration: InputDecoration(
+            labelText: 'Personel Soyadı',
+            hintText: 'At least 4 charachter',
+            icon: const Icon(Icons.person),
+            fillColor: Colors.white,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: flagUsername == true
+                  ? const BorderSide(color: Colors.green)
+                  : const BorderSide(color: Colors.red),
+            ),
+            border: const OutlineInputBorder(),
+          ),
+          validator: (value) {
+            if (value!.length < 4) {
+              return "At least 4 charachter";
+            } else {
+              return null;
+            }
+          },
+          maxLength: 30,
+          onChanged: (value) {
+            setState(() {
+              if (value!.length < 4) {
+                flagUsername = false;
+              } else {
+                flagUsername = true;
+              }
+              soyad = value;
+            });
+          },
+        ),
+      );
+  buildPersonelEklemeYas() => Padding(
+        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+        child: TextFormField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            labelText: 'Personel Yaş',
+            hintText: 'At least 4 charachter',
+            icon: const Icon(Icons.person),
+            fillColor: Colors.white,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: flagUsername == true
+                  ? const BorderSide(color: Colors.green)
+                  : const BorderSide(color: Colors.red),
+            ),
+            border: const OutlineInputBorder(),
+          ),
+          validator: (value) {
+            if (value!.length < 4) {
+              return "At least 4 charachter";
+            } else {
+              return null;
+            }
+          },
+          maxLength: 30,
+          onChanged: (value) {
+            setState(() {
+              if (value!.length < 4) {
+                flagUsername = false;
+              } else {
+                flagUsername = true;
+              }
+              yas = int.parse(value);
+            });
+          },
+        ),
+      );
+  buildPersonelEklemeMaas() => Padding(
+        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+        child: TextFormField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            labelText: 'Personel Maaş',
+            hintText: 'Maaşı giriniz',
+            icon: const Icon(Icons.person),
+            fillColor: Colors.white,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: flagUsername == true
+                  ? const BorderSide(color: Colors.green)
+                  : const BorderSide(color: Colors.red),
+            ),
+            border: const OutlineInputBorder(),
+          ),
+          validator: (value) {
+            if (value!.length < 4) {
+              return "At least 4 charachter";
+            } else {
+              return null;
+            }
+          },
+          maxLength: 30,
+          onChanged: (value) {
+            setState(() {
+              if (value!.length < 4) {
+                flagUsername = false;
+              } else {
+                flagUsername = true;
+              }
+              maas = int.parse(value);
+            });
+          },
+        ),
+      );
+
+  Widget buildPersonelEklemeCinsiyet() => Padding(
+        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+        child: DropdownButtonFormField<dynamic>(
+          decoration: const InputDecoration(
+            labelText: "Cinsiyet",
+            hintText: 'Cinsiyeti seçin',
+            icon: Icon(Icons.person_pin_circle),
+
+            enabledBorder: OutlineInputBorder(
+                //borderSide: BorderSide(color: Colors.blue, width: 2),
+
+                ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color.fromARGB(255, 35, 35, 35), width: 0.4),
+            ),
+            //filled: true,
+            fillColor: Colors.white,
+          ),
+          value: null,
+          items: cinsiyetler
+              .map((cinsiyet) => DropdownMenuItem<dynamic>(
+                  value: cinsiyet,
+                  child: Container(
+                    height: 32,
+                    child: Text(cinsiyet.toString(),
+                        style: const TextStyle(fontSize: 15)),
+                  )))
+              .toList(),
+          onChanged: (value) {
+            cinsiyet = value;
+          },
+          // onChanged: (userType) {
+          //   setState(() {
+          //     userTypeApi = userType;
+          //     if (userType == null) {
+          //       flagUsertype = false;
+          //     } else {
+          //       flagUsertype = true;
+          //     }
+          //     // selectedUserType = userType;
+          //   });
+          // },
+          validator: (userType) {
+            if (userType == null) {
+              return "Select one";
+            } else {
+              return null;
+            }
+          },
+        ),
+      );
+  Widget buildBirthDate() => Row(
+        children: [
+          Icon(
+            Icons.cake_outlined,
+            color: kPrimaryColor,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.01,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 0.4),
+              // borderRadius: BorderRadius.circular(1),TODO
+            ),
+
+            //height: 50,
+            height: MediaQuery.of(context).size.height * 0.067,
+            width: MediaQuery.of(context).size.width * 0.42,
+
+            child: ElevatedButton(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        textAlign: TextAlign.left,
+                        dogumTarihiString,
+                        style: TextStyle(
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15),
+                      ),
+                    ],
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    backgroundColor: kPrimaryBackLightColor.withOpacity(1)),
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime:
+                          DateTime.now().subtract(Duration(days: 365 * 90)),
+                      maxTime:
+                          DateTime.now().subtract(Duration(days: 365 * 15)),
+                      /*  theme: DatePickerTheme(
+                          headerColor: kPrimaryUltraLightColor,
+                          backgroundColor: kPrimaryBackLightColor,
+                          itemStyle: TextStyle(
+                              color: textInfoColor,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 18),
+                          doneStyle:
+                              TextStyle(color: textInfoColor, fontSize: 16)),*/
+
+                      onConfirm: (date) {
+                    setState(() async {
+                      var tag =
+                          Localizations.maybeLocaleOf(context)?.toLanguageTag();
+                      dogumTarihiString = "Doğum tarihi seçiniz";
+                      print(dogumTarihiString);
+                      dogumTarihiString =
+                          await DateFormat("dd MMMM yyyy").format(date);
+                      dogumTarihi = date;
+                    });
+                  }, currentTime: DateTime.now(), locale: LocaleType.tr);
+                }),
+          ),
+        ],
+      );
 
   bool flagUsername = false;
   Widget buildYorum() => Padding(
@@ -456,9 +794,10 @@ class _PersonellerState extends State<Personeller> {
               if (value!.length < 4) {
                 flagUsername = false;
               } else {
-                flagUsername = true;
+                flagUsername =
+                    true; // TODO flagların namei değişecek hepsi red oluyor hepsi username gore
+                gorev = value; //TODO bunlar atılacak
               }
-              // username = value;
             });
           },
         ),

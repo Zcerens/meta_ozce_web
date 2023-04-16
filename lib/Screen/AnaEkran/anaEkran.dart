@@ -24,9 +24,7 @@ class _AnaEkranState extends State<AnaEkran> {
               //let's add the navigation menu for this project
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  
-                ],
+                children: [],
               ),
               const SizedBox(
                 height: 20.0,
@@ -255,146 +253,11 @@ class _AnaEkranState extends State<AnaEkran> {
               ),
 
               //let's set the filter section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.deepPurple.shade400,
-                    ),
-                    label: Text(
-                      "2022, July 14, July 15, July 16",
-                      style: TextStyle(
-                        color: Colors.deepPurple.shade400,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      DropdownButton(
-                          hint: const Text("Filter by"),
-                          items: [
-                            const DropdownMenuItem(
-                              value: "Date",
-                              child: Text("Date"),
-                            ),
-                            const DropdownMenuItem(
-                              value: "Comments",
-                              child: Text("Comments"),
-                            ),
-                            const DropdownMenuItem(
-                              value: "Views",
-                              child: Text("Views"),
-                            ),
-                          ],
-                          onChanged: (value) {}),
-                      const SizedBox(
-                        width: 20.0,
-                      ),
-                      DropdownButton(
-                          hint: const Text("Order by"),
-                          items: [
-                            const DropdownMenuItem(
-                              value: "Date",
-                              child: Text("Date"),
-                            ),
-                            const DropdownMenuItem(
-                              value: "Comments",
-                              child: Text("Comments"),
-                            ),
-                            const DropdownMenuItem(
-                              value: "Views",
-                              child: Text("Views"),
-                            ),
-                          ],
-                          onChanged: (value) {}),
-                    ],
-                  ),
-                ],
-              ),
+
               const SizedBox(
                 height: 40.0,
               ),
               //Now let's add the Table
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  DataTable(
-                      headingRowColor: MaterialStateProperty.resolveWith(
-                          (states) => Colors.grey.shade200),
-                      columns: [
-                        const DataColumn(label: Text("ID")),
-                        const DataColumn(label: Text("Article Title")),
-                        const DataColumn(label: Text("Creation Date")),
-                        const DataColumn(label: Text("Views")),
-                        const DataColumn(label: Text("Comments")),
-                      ],
-                      rows: [
-                        DataRow(cells: [
-                          const DataCell(Text("0")),
-                          const DataCell(
-                              Text("How to build a Flutter Web App")),
-                          DataCell(Text("${DateTime.now()}")),
-                          const DataCell(Text("2.3K Views")),
-                          const DataCell(Text("102Comments")),
-                        ]),
-                        DataRow(cells: [
-                          const DataCell(Text("1")),
-                          const DataCell(
-                              Text("How to build a Flutter Mobile App")),
-                          DataCell(Text("${DateTime.now()}")),
-                          const DataCell(Text("21.3K Views")),
-                          const DataCell(Text("1020Comments")),
-                        ]),
-                        DataRow(cells: [
-                          const DataCell(Text("2")),
-                          const DataCell(
-                              Text("Flutter for your first project")),
-                          DataCell(Text("${DateTime.now()}")),
-                          const DataCell(Text("2.3M Views")),
-                          const DataCell(Text("10K Comments")),
-                        ]),
-                      ]),
-                  //Now let's set the pagination
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "1",
-                          style: TextStyle(color: Colors.deepPurple),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "2",
-                          style: TextStyle(color: Colors.deepPurple),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "3",
-                          style: TextStyle(color: Colors.deepPurple),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "See All",
-                          style: TextStyle(color: Colors.deepPurple),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )
             ],
           ),
         ),
@@ -402,3 +265,21 @@ class _AnaEkranState extends State<AnaEkran> {
     );
   }
 }
+
+//  DropdownButton(
+//                           hint: const Text("Order by"),
+//                           items: [
+//                             const DropdownMenuItem(
+//                               value: "Date",
+//                               child: Text("Date"),
+//                             ),
+//                             const DropdownMenuItem(
+//                               value: "Comments",
+//                               child: Text("Comments"),
+//                             ),
+//                             const DropdownMenuItem(
+//                               value: "Views",
+//                               child: Text("Views"),
+//                             ),
+//                           ],
+//                           onChanged: (value) {}),
