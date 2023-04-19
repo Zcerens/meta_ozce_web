@@ -17,21 +17,6 @@ class _HomeFormState extends State<HomeForm> {
   bool isExpanded = false;
   int _selectedIndex = 0;
 
-  List<Map<String, dynamic>> medCat = [
-    {"icon": FontAwesomeIcons.userDoctor, "category": "Ahmet Karaman"},
-    {"icon": FontAwesomeIcons.heartPulse, "category": "Kerem Dadak"},
-    {"icon": FontAwesomeIcons.hand, "category": "Mehmet Sakin"},
-    {"icon": FontAwesomeIcons.lungs, "category": "Ayşe Yenilmez"},
-    {"icon": FontAwesomeIcons.heartPulse, "category": "Kerem Dadak"},
-    {"icon": FontAwesomeIcons.hand, "category": "Mehmet Sakin"},
-    {"icon": FontAwesomeIcons.lungs, "category": "Ayşe Yenilmez"},
-    {"icon": FontAwesomeIcons.heartPulse, "category": "Kerem Dadak"},
-    {"icon": FontAwesomeIcons.hand, "category": "Mehmet Sakin"},
-    {"icon": FontAwesomeIcons.lungs, "category": "Ayşe Yenilmez"},
-    {"icon": FontAwesomeIcons.heartPulse, "category": "Kerem Dadak"},
-    {"icon": FontAwesomeIcons.hand, "category": "Mehmet Sakin"},
-    {"icon": FontAwesomeIcons.lungs, "category": "Ayşe Yenilmez"}
-  ];
   List<dynamic> tumGorevler = [
     {"icerik": "Oda 1 temizlenecek", "kod": "0"},
     {"icerik": "Oda 2 temizlenecek", "kod": "1"}

@@ -369,6 +369,10 @@ class _PersonellerState extends State<Personeller> {
                                                           }),
                                                       buildYorum(),
 
+                                                      ElevatedButton(
+                                                        onPressed: () {},
+                                                        child: Text("-"),
+                                                      )
                                                       // Text(
                                                       //     listOfGorevler[
                                                       //             0]
@@ -383,6 +387,7 @@ class _PersonellerState extends State<Personeller> {
                                                             .add({
                                                           'gorev': gorev,
                                                           'kategori': kategori,
+                                                          'status': 'Bekleyen'
                                                           // personelRef.document(adSoyad).collection('string name').document().setData();
                                                         });
 
