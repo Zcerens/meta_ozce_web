@@ -43,6 +43,21 @@ class _PersonellerState extends State<Personeller> {
     "Yemek Servisi",
     "Temizlik"
   ];
+  List<Map<String, dynamic>> otelListesi = [
+    {
+      "username": "WomeDeluxe",
+      "adi": 'Wome Deluxe',
+      'resmi':
+          'https://cdn.halalstatic.com/2021/05/18/14/56/16/13868f41-4f24-4b5a-99f8-3ce90d962a64/15618_KFC2dYWmrebQNwkAexgEBw.jpg?fit=bounds&width=750'
+    },
+    {
+      "userName": "StarlightOtel",
+      "adi": 'Starlight Otel',
+      'resmi':
+          'https://www.otelfiyat.com/media/inet/3874755353/buyuk/VDGHPG1569920413.jpg'
+    },
+  ];
+
   late bool loading = true;
 
   String ad = "";
@@ -61,6 +76,8 @@ class _PersonellerState extends State<Personeller> {
 
   String kategori = "";
   String gorev = "";
+
+  var flagWomeDeluxe = false;
 
   @override
   void initState() {
@@ -109,6 +126,7 @@ class _PersonellerState extends State<Personeller> {
               width: MediaQuery.of(context).size.width * 0.6,
               child: Column(
                 children: [
+                  buildOteller(),
                   // StreamBuilder<DocumentSnapshot>(
                   //     stream: babaRef.snapshots(),
                   //     builder:
@@ -117,8 +135,9 @@ class _PersonellerState extends State<Personeller> {
                   //     }),
 
                   // Text("personeller as String"),
-
-                  buildCalisanlar(),
+                  flagWomeDeluxe == true
+                      ? buildCalisanlar()
+                      : Center(child: CircularProgressIndicator()),
                 ],
               ),
             ),
@@ -129,56 +148,105 @@ class _PersonellerState extends State<Personeller> {
   }
 
   bool flagUsertype = false;
-  // Widget buildGorevAtama() => Padding(
-  //       padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
-  //       child: DropdownButtonFormField<dynamic>(
-  //         decoration: const InputDecoration(
-  //           labelText: "Görevler",
-  //           hintText: 'Atanacak görevi seçin',
-  //           icon: Icon(Icons.person_pin_circle),
 
-  //           enabledBorder: OutlineInputBorder(
-  //               //borderSide: BorderSide(color: Colors.blue, width: 2),
+  Widget buildOteller() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                "Oteller",
+                style: TextStyle(fontSize: 42, color: kPrimaryColor),
+              ),
+            ],
+          ),
+        ),
+        new Divider(
+          color: kPrimaryColor,
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        SizedBox(
+            height: 250,
+            child: ListView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: otelListesi.length,
+                itemBuilder: (context, index) {
+                  var _otel = otelListesi[index];
+                  return Column(
+                    children: [
+                      // Text("${listOfDocumentSnap[index].data()}"),
+                      Container(
+                        height: 150,
+                        width: 200,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 20),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              const BoxShadow(
+                                  color: kPrimaryColor,
+                                  blurRadius: 4,
+                                  spreadRadius: 2)
+                            ]),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        flagWomeDeluxe = !flagWomeDeluxe;
+                                      });
+                                    },
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 00),
+                                          child: Image.network(
+                                            _otel['resmi'],
+                                            fit: BoxFit.cover,
+                                            alignment: Alignment.center,
+                                          ),
+                                        )),
+                                  )
+                                ],
+                              ),
+                            ]),
+                      ),
+                      Text(_otel['adi'],
+                          style: const TextStyle(
+                              fontSize: 15, color: kPrimaryColor),
+                          textAlign: TextAlign.center),
+                    ],
+                  );
+                })),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {},
+              child: Icon(Icons.add),
+              backgroundColor: Colors.green,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
-  //               ),
-  //           border: OutlineInputBorder(
-  //             borderSide: BorderSide(
-  //                 color: Color.fromARGB(255, 35, 35, 35), width: 0.4),
-  //           ),
-  //           //filled: true,
-  //           fillColor: Colors.white,
-  //         ),
-  //         value: null,
-  //         items: cinsiyetler
-  //             .map((gorev) => DropdownMenuItem<dynamic>(
-  //                 value: gorev,
-  //                 child: Container(
-  //                   height: 32,
-  //                   child: Text(gorev['icerik'].toString(),
-  //                       style: const TextStyle(fontSize: 15)),
-  //                 )))
-  //             .toList(),
-  //         onChanged: (value) {},
-  //         // onChanged: (userType) {
-  //         //   setState(() {
-  //         //     userTypeApi = userType;
-  //         //     if (userType == null) {
-  //         //       flagUsertype = false;
-  //         //     } else {
-  //         //       flagUsertype = true;
-  //         //     }
-  //         //     // selectedUserType = userType;
-  //         //   });
-  //         // },
-  //         validator: (userType) {
-  //           if (userType == null) {
-  //             return "Select one";
-  //           } else {
-  //             return null;
-  //           }
-  //         },
-  //       ),
-  //     );
   Widget buildCalisanlar() {
     CollectionReference personelRef = _firestore.collection("metaOzcePersonel");
 
@@ -261,10 +329,65 @@ class _PersonellerState extends State<Personeller> {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  title: Text(
-                                                      "${listOfDocumentSnap[index].data()} "),
+                                                  title: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text("Personel Detayı",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ],
+                                                  ),
                                                   content: Column(
                                                     children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "Personel Adı: ${listOfDocumentSnap[index].get('ad')} "),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "Personel Soyadı: ${listOfDocumentSnap[index].get('soyad')} "),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "Personel Yaşı: ${listOfDocumentSnap[index].get('yas')} "),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "Personel Cinsiyeti: ${listOfDocumentSnap[index].get('cinsiyet')} "),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "Personel Maaşı: ${listOfDocumentSnap[index].get('maas')} TL "),
+                                                        ],
+                                                      ),
                                                       StreamBuilder<
                                                               QuerySnapshot>(
                                                           stream:
@@ -360,10 +483,6 @@ class _PersonellerState extends State<Personeller> {
                                                           }),
                                                       buildYorum(),
 
-                                                      ElevatedButton(
-                                                        onPressed: () {},
-                                                        child: Text("-"),
-                                                      )
                                                       // Text(
                                                       //     listOfGorevler[
                                                       //             0]
@@ -373,6 +492,18 @@ class _PersonellerState extends State<Personeller> {
                                                   ),
                                                   actions: <Widget>[
                                                     ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors.red),
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                            "İşten Çıkar")),
+                                                    ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  Colors.green),
                                                       onPressed: () {
                                                         gorevKategorileriRef
                                                             .add({
@@ -389,8 +520,8 @@ class _PersonellerState extends State<Personeller> {
 
                                                         // gorevKategorileriRef.add("gorev" : "bla")
                                                       },
-                                                      child:
-                                                          const Text("Gönder"),
+                                                      child: const Text(
+                                                          "Görev Ekle"),
                                                     ),
                                                   ],
                                                 );
@@ -773,7 +904,7 @@ class _PersonellerState extends State<Personeller> {
         padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
         child: TextFormField(
           decoration: InputDecoration(
-            labelText: 'Not',
+            labelText: 'Görev Detayı',
             hintText: 'At least 4 charachter',
             icon: const Icon(Icons.person),
             fillColor: Colors.white,

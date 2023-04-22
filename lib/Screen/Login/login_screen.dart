@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 15),
                 LoginField(
-                  hintText: 'Parola',
+                  hintText: 'Kurum Parolası',
                   controller: otelParolasiController,
                 ),
                 const SizedBox(height: 20),
@@ -80,10 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ))
                         : Fluttertoast.showToast(
+                            webPosition: "center",
+                            webBgColor: " #FF0000",
+                            fontSize: 20,
                             toastLength: Toast.LENGTH_LONG,
-                            msg: "Favorilere eklendi",
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.green);
+                            msg: "Hatalı Giriş",
+                          );
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(395, 55),

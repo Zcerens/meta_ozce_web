@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
               child: Text('beklenmeyen hata'),
             );
           } else if (asyncSnapshot.hasData) {
-            return LoginScreen();
+            return HomeScreen();
           } else {
             return Center(
               child: CircularProgressIndicator(),
