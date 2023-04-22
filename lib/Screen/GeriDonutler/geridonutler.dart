@@ -22,7 +22,7 @@ class _GeriDonutlerState extends State<GeriDonutler> {
           width: MediaQuery.of(context).size.width * 0.6,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(children: [Text("hello"), buildTabloOlusturma()]),
+            child: Column(children: [buildTabloOlusturma()]),
           ),
         ),
       ),
@@ -59,38 +59,162 @@ class _GeriDonutlerState extends State<GeriDonutler> {
                 List<DocumentSnapshot> listOfDocumentSnap =
                     asyncSnapshot.data.docs;
                 print(listOfDocumentSnap[0].get('mobil'));
-                return ListView.builder(
-                    itemCount: listOfDocumentSnap.length,
-                    itemBuilder: (context, index) {
-                      return DataTable(
-                          columnSpacing: 30.0,
-                          headingRowColor: MaterialStateProperty.resolveWith(
-                              (states) => Colors.grey.shade200),
-                          columns: [
-                            const DataColumn(
-                                label: Text(
-                              "Yorum Sayısı",
-                            )),
-                            const DataColumn(label: Text("Otel Puanı (0-5)")),
-                            const DataColumn(
-                                label: Text("Otel Değerlendirme Notu")),
-                            const DataColumn(
-                                label: Text("Uygulama Puanı (0-5)")),
-                            const DataColumn(
-                                label: Text("Uygulama Değerlendirme Notu")),
-                          ],
-                          rows: [
-                            DataRow(cells: [
-                              DataCell(
-                                  Text(listOfDocumentSnap[index].get('mobil'))),
-                              const DataCell(
-                                  Text("How to build a Flutter Web App")),
-                              //DataCell(Text("${DateTime.now()}")),
-                              const DataCell(Text("2.3K Views")),
-                              const DataCell(Text("102Comments")),
-                            ]),
-                          ]);
-                    });
+
+                return Column(
+                  children: [
+                    DataTable(
+                      columnSpacing: 30.0,
+                      headingRowColor: MaterialStateProperty.resolveWith(
+                          (states) => Colors.grey.shade200),
+                      columns: [
+                        const DataColumn(
+                            label: Text(
+                          "Yorum Sayısı",
+                        )),
+                        const DataColumn(label: Text("Otel Puanı (0-5)")),
+                        const DataColumn(
+                            label: Text("Otel Değerlendirme Notu")),
+                        const DataColumn(label: Text("Uygulama Puanı (0-5)")),
+                        const DataColumn(
+                            label: Text("Uygulama Değerlendirme Notu")),
+                      ],
+                      rows: [],
+                      // rows: _createRows(asyncSnapshot.data),
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 125.0),
+                          child: Container(
+                            width: 124,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: listOfDocumentSnap.length,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${index + 1}",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        )
+                                      ]);
+                                }),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 00.0),
+                          child: Container(
+                            width: 135,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: listOfDocumentSnap.length,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          listOfDocumentSnap[index]
+                                              .get('rating')
+                                              .toString(),
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        )
+                                      ]);
+                                }),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 00.0),
+                          child: Container(
+                            width: 184,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: listOfDocumentSnap.length,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          listOfDocumentSnap[index]
+                                              .get('otelDegerlendirme'),
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        )
+                                      ]);
+                                }),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 00.0),
+                          child: Container(
+                            width: 175,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: listOfDocumentSnap.length,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          listOfDocumentSnap[index]
+                                              .get('otelPuan')
+                                              .toString(),
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        )
+                                      ]);
+                                }),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 00.0),
+                          child: Container(
+                            width: 200,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: listOfDocumentSnap.length,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          listOfDocumentSnap[index]
+                                              .get('mobil'),
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Divider(
+                                          height: 2,
+                                          color: kPrimaryColor,
+                                          thickness: 2,
+                                        )
+                                      ]);
+                                }),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                );
               }),
 
           const SizedBox(
@@ -134,5 +258,16 @@ class _GeriDonutlerState extends State<GeriDonutler> {
         ],
       ),
     );
+  }
+
+  List<DataRow> _createRows(QuerySnapshot snapshot) {
+    List<DataRow> newList =
+        snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+      return new DataRow(cells: [
+        DataCell(Text(documentSnapshot.get('mobil').toString())),
+      ]);
+    }).toList();
+
+    return newList;
   }
 }

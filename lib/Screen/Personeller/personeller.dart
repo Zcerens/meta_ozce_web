@@ -117,16 +117,7 @@ class _PersonellerState extends State<Personeller> {
                   //     }),
 
                   // Text("personeller as String"),
-                  IconButton(
-                    onPressed: () {
-                      //let's trigger the navigation expansion
-                      setState(() {
-                        getData();
-                        isExpanded = !isExpanded;
-                      });
-                    },
-                    icon: const Icon(Icons.menu),
-                  ),
+
                   buildCalisanlar(),
                 ],
               ),

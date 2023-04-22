@@ -28,7 +28,7 @@ class _HomeFormState extends State<HomeForm> {
       AnaEkran(),
       GeriDonutler(),
       Personeller(),
-      dorduncuEkran(),
+      //dorduncuEkran(),
     ];
     return Scaffold(
       body: Row(
@@ -62,10 +62,10 @@ class _HomeFormState extends State<HomeForm> {
                 icon: Icon(Icons.person),
                 label: Text("Profile"),
               ),
-              NavigationRailDestination(
-                icon: Icon(Icons.settings),
-                label: Text("Settings"),
-              ),
+              // NavigationRailDestination(
+              //   icon: Icon(Icons.settings),
+              //   label: Text("Settings"),
+              // ),
             ],
           ),
           screens[_selectedIndex],
