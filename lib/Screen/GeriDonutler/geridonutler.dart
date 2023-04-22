@@ -16,13 +16,18 @@ class GeriDonutler extends StatefulWidget {
 class _GeriDonutlerState extends State<GeriDonutler> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.6,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(children: [buildTabloOlusturma()]),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 300.0),
+        child: Expanded(
+          child: Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 80.0),
+                child: Column(children: [buildTabloOlusturma()]),
+              ),
+            ),
           ),
         ),
       ),
@@ -58,7 +63,7 @@ class _GeriDonutlerState extends State<GeriDonutler> {
               builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
                 List<DocumentSnapshot> listOfDocumentSnap =
                     asyncSnapshot.data.docs;
-                print(listOfDocumentSnap[0].get('mobil'));
+                // print(listOfDocumentSnap[0].get('mobil'));
 
                 return Column(
                   children: [
@@ -102,7 +107,7 @@ class _GeriDonutlerState extends State<GeriDonutler> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 40,
                                         )
                                       ]);
                                 }),
@@ -127,8 +132,8 @@ class _GeriDonutlerState extends State<GeriDonutler> {
                                           style: TextStyle(fontSize: 15),
                                         ),
                                         SizedBox(
-                                          height: 5,
-                                        )
+                                          height: 40,
+                                        ),
                                       ]);
                                 }),
                           ),
@@ -151,7 +156,7 @@ class _GeriDonutlerState extends State<GeriDonutler> {
                                           style: TextStyle(fontSize: 12),
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 40,
                                         )
                                       ]);
                                 }),
@@ -176,7 +181,7 @@ class _GeriDonutlerState extends State<GeriDonutler> {
                                           style: TextStyle(fontSize: 15),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 40,
                                         )
                                       ]);
                                 }),
@@ -200,13 +205,8 @@ class _GeriDonutlerState extends State<GeriDonutler> {
                                           style: TextStyle(fontSize: 12),
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 40,
                                         ),
-                                        Divider(
-                                          height: 2,
-                                          color: kPrimaryColor,
-                                          thickness: 2,
-                                        )
                                       ]);
                                 }),
                           ),
@@ -223,38 +223,38 @@ class _GeriDonutlerState extends State<GeriDonutler> {
 
           //Now let's set the pagination
 
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "1",
-                  style: TextStyle(color: Colors.deepPurple),
-                ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "2",
-                  style: TextStyle(color: Colors.deepPurple),
-                ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "3",
-                  style: TextStyle(color: Colors.deepPurple),
-                ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "See All",
-                  style: TextStyle(color: Colors.deepPurple),
-                ),
-              ),
-            ],
-          )
+          // Row(
+          //   children: [
+          //     TextButton(
+          //       onPressed: () {},
+          //       child: const Text(
+          //         "1",
+          //         style: TextStyle(color: Colors.deepPurple),
+          //       ),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {},
+          //       child: const Text(
+          //         "2",
+          //         style: TextStyle(color: Colors.deepPurple),
+          //       ),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {},
+          //       child: const Text(
+          //         "3",
+          //         style: TextStyle(color: Colors.deepPurple),
+          //       ),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {},
+          //       child: const Text(
+          //         "See All",
+          //         style: TextStyle(color: Colors.deepPurple),
+          //       ),
+          //     ),
+          //   ],
+          // )
         ],
       ),
     );

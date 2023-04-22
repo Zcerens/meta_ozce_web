@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:meta_ozce_0/Screen/Login/login_screen.dart';
+import 'package:meta_ozce_0/components/home_form.dart';
 import 'package:meta_ozce_0/constants.dart';
 
 import 'Screen/Personeller/personeller.dart';
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
               child: Text('beklenmeyen hata'),
             );
           } else if (asyncSnapshot.hasData) {
-            return HomeScreen();
+            return LoginScreen();
           } else {
             return Center(
               child: CircularProgressIndicator(),
