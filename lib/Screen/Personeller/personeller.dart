@@ -341,154 +341,180 @@ class _PersonellerState extends State<Personeller> {
                                                                       .bold)),
                                                     ],
                                                   ),
-                                                  content: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              "Personel Adı: ${listOfDocumentSnap[index].get('ad')} "),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              "Personel Soyadı: ${listOfDocumentSnap[index].get('soyad')} "),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              "Personel Yaşı: ${listOfDocumentSnap[index].get('yas')} "),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              "Personel Cinsiyeti: ${listOfDocumentSnap[index].get('cinsiyet')} "),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              "Personel Maaşı: ${listOfDocumentSnap[index].get('maas')} TL "),
-                                                        ],
-                                                      ),
-                                                      StreamBuilder<
-                                                              QuerySnapshot>(
-                                                          stream:
-                                                              gorevKategorileriRef
-                                                                  .snapshots(),
-                                                          builder: (BuildContext
-                                                                  context,
-                                                              AsyncSnapshot
-                                                                  asyncSnapshot) {
-                                                            List<DocumentSnapshot>
-                                                                listOfGorevler =
-                                                                asyncSnapshot
-                                                                    .data.docs;
-                                                            return Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 20,
-                                                                      left: 5,
-                                                                      right: 5),
-                                                              child:
-                                                                  DropdownButtonFormField<
-                                                                      dynamic>(
-                                                                decoration:
-                                                                    const InputDecoration(
-                                                                  labelText:
-                                                                      "Görevler",
-                                                                  hintText:
-                                                                      'Atanacak görevi seçin',
-                                                                  icon: Icon(Icons
-                                                                      .person_pin_circle),
+                                                  content: Container(
+                                                    width: 300.0,
+                                                    height: 500.0,
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                                "Personel Adı: ${listOfDocumentSnap[index].get('ad')} "),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                                "Personel Soyadı: ${listOfDocumentSnap[index].get('soyad')} "),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                                "Personel Yaşı: ${listOfDocumentSnap[index].get('yas')} "),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                                "Personel Cinsiyeti: ${listOfDocumentSnap[index].get('cinsiyet')} "),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                                "Personel Maaşı: ${listOfDocumentSnap[index].get('maas')} TL "),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 40,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              "Personele Görev Ata",
+                                                              style: TextStyle(
+                                                                  fontSize: 19,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        StreamBuilder<
+                                                                QuerySnapshot>(
+                                                            stream:
+                                                                gorevKategorileriRef
+                                                                    .snapshots(),
+                                                            builder: (BuildContext
+                                                                    context,
+                                                                AsyncSnapshot
+                                                                    asyncSnapshot) {
+                                                              List<DocumentSnapshot>
+                                                                  listOfGorevler =
+                                                                  asyncSnapshot
+                                                                      .data
+                                                                      .docs;
+                                                              return Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top: 20,
+                                                                        left: 5,
+                                                                        right:
+                                                                            5),
+                                                                child:
+                                                                    DropdownButtonFormField<
+                                                                        dynamic>(
+                                                                  decoration:
+                                                                      const InputDecoration(
+                                                                    labelText:
+                                                                        "Görevler",
+                                                                    hintText:
+                                                                        'Atanacak görevi seçin',
+                                                                    icon: Icon(Icons
+                                                                        .person_pin_circle),
 
-                                                                  enabledBorder:
-                                                                      OutlineInputBorder(
-                                                                          //borderSide: BorderSide(color: Colors.blue, width: 2),
+                                                                    enabledBorder:
+                                                                        OutlineInputBorder(
+                                                                            //borderSide: BorderSide(color: Colors.blue, width: 2),
 
-                                                                          ),
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderSide: BorderSide(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            35,
-                                                                            35,
-                                                                            35),
-                                                                        width:
-                                                                            0.4),
+                                                                            ),
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderSide: BorderSide(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              35,
+                                                                              35,
+                                                                              35),
+                                                                          width:
+                                                                              0.4),
+                                                                    ),
+                                                                    //filled: true,
+                                                                    fillColor:
+                                                                        Colors
+                                                                            .white,
                                                                   ),
-                                                                  //filled: true,
-                                                                  fillColor:
-                                                                      Colors
-                                                                          .white,
+                                                                  value: null,
+                                                                  items: kategoriler
+                                                                      .map((kategori) => DropdownMenuItem<dynamic>(
+                                                                          value: kategori,
+                                                                          child: Container(
+                                                                            height:
+                                                                                32,
+                                                                            child:
+                                                                                Text(kategori.toString(), style: const TextStyle(fontSize: 15)),
+                                                                          )))
+                                                                      .toList(),
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    kategori =
+                                                                        value;
+                                                                  },
+                                                                  // onChanged: (userType) {
+                                                                  //   setState(() {
+                                                                  //     userTypeApi = userType;
+                                                                  //     if (userType == null) {
+                                                                  //       flagUsertype = false;
+                                                                  //     } else {
+                                                                  //       flagUsertype = true;
+                                                                  //     }
+                                                                  //     // selectedUserType = userType;
+                                                                  //   });
+                                                                  // },
+                                                                  validator:
+                                                                      (userType) {
+                                                                    if (userType ==
+                                                                        null) {
+                                                                      return "Select one";
+                                                                    } else {
+                                                                      return null;
+                                                                    }
+                                                                  },
                                                                 ),
-                                                                value: null,
-                                                                items: kategoriler
-                                                                    .map((kategori) => DropdownMenuItem<dynamic>(
-                                                                        value: kategori,
-                                                                        child: Container(
-                                                                          height:
-                                                                              32,
-                                                                          child: Text(
-                                                                              kategori.toString(),
-                                                                              style: const TextStyle(fontSize: 15)),
-                                                                        )))
-                                                                    .toList(),
-                                                                onChanged:
-                                                                    (value) {
-                                                                  kategori =
-                                                                      value;
-                                                                },
-                                                                // onChanged: (userType) {
-                                                                //   setState(() {
-                                                                //     userTypeApi = userType;
-                                                                //     if (userType == null) {
-                                                                //       flagUsertype = false;
-                                                                //     } else {
-                                                                //       flagUsertype = true;
-                                                                //     }
-                                                                //     // selectedUserType = userType;
-                                                                //   });
-                                                                // },
-                                                                validator:
-                                                                    (userType) {
-                                                                  if (userType ==
-                                                                      null) {
-                                                                    return "Select one";
-                                                                  } else {
-                                                                    return null;
-                                                                  }
-                                                                },
-                                                              ),
-                                                            );
-                                                          }),
-                                                      buildYorum(),
+                                                              );
+                                                            }),
+                                                        buildYorum(),
 
-                                                      // Text(
-                                                      //     listOfGorevler[
-                                                      //             0]
-                                                      //         .get(
-                                                      //             "gorev"))
-                                                    ],
+                                                        // Text(
+                                                        //     listOfGorevler[
+                                                        //             0]
+                                                        //         .get(
+                                                        //             "gorev"))
+                                                      ],
+                                                    ),
                                                   ),
                                                   actions: <Widget>[
                                                     ElevatedButton(

@@ -20,9 +20,9 @@ class Background extends StatelessWidget {
         centerTitle: true,
         title: Text(
           '${title}',
-          style: TextStyle(color: kPrimaryColor),
+          style: TextStyle(color: kPrimaryLightColor),
         ),
-        backgroundColor: kPrimaryLightColor,
+        backgroundColor: kPrimaryColor,
       ),
       // bottomNavigationBar:
       resizeToAvoidBottomInset: false,
