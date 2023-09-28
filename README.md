@@ -1,16 +1,6 @@
-# meta_ozce_0
+Hotel manager hotel control web page.
+- Personnel recruitment, dismissal, salary management, task assignment
+- See daily income, percentage of stay and active employees
+- View multiple hotels owned by the manager
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Ekran görüntüsü 2023-09-28 175617](https://github.com/Zcerens/meta_ozce_web/assets/76790429/4dda4691-f5a6-485d-8ad8-bf957d646156)
